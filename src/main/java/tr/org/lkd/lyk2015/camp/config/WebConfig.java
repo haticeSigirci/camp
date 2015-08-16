@@ -27,7 +27,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan({"tr.org.lkd.lyk2015.camp.service","tr.org.lkd.lyk2015.camp.controller","tr.org.lkd.lyk2015.camp.repository"})
+@ComponentScan({"tr.org.lkd.lyk2015.camp.service","tr.org.lkd.lyk2015.camp.controller","tr.org.lkd.lyk2015.camp.dal"})
 public class WebConfig extends WebMvcConfigurerAdapter{
 
 	@Bean			//bean annotation ???
@@ -71,6 +71,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	@Description("Thymeleaf view resolver")
 	public ThymeleafViewResolver viewResolver() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setContentType("text/html;charset=UTF-8");
 		viewResolver.setTemplateEngine(templateEngine());
 
 		return viewResolver;
