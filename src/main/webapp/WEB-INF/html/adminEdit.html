@@ -1,0 +1,50 @@
+<html lang="tr">
+<th:block th:fragment="content">
+	<div class="form-group">
+		<form action="#" th:action="@{/admin/update/__*{id}__}" th:object="${admin}"
+			method="post">
+			<div class="col-md-3">
+				<p>
+					<input type="hidden" class="form-control" placeholder="Name"
+						th:field="*{id}" th:value="*{id}" />
+				</p>
+			
+				<p>
+					<input type="text" class="form-control" placeholder="Name"
+						th:field="*{name}" th:value="*{name}" />
+				</p>
+				<p>
+					<input type="text" class="form-control" placeholder="Surname"
+						th:field="*{surname}" th:value="*{surname}"/>
+				</p>
+				<p>
+					<input type="number" class="form-control" placeholder="Birth Date"
+						th:field="*{birthDate}" th:value="*{birthDate}"/>
+				</p>
+				<p>
+					<input type="number" class="form-control" placeholder="TCKNO"
+						th:field="*{tckn}" th:value="*{tckn}"/>
+				</p>
+				<p>
+					<input type="email" class="form-control" placeholder="E mail"
+						th:field="*{email}" th:value="*{email}"/>
+				</p>
+				<p>
+					<input type="password" class="form-control" placeholder="Password"
+						th:field="*{password}" th:value="*{password}"/>
+				</p>
+				<p>
+					<input type="tel" class="form-control" placeholder="Phone"
+						th:field="*{phone}" th:value="*{phone}"/>
+				</p>
+				<p>
+					<input type="text" class="form-control" placeholder="LKDNO"
+						th:field="*{lkdNo}" th:value="*{lkdNo}"/>
+				</p>
+				<input type="submit" class="btn btn-primary" value="Submit" /> <input
+					type="reset" class="btn btn-primary" value="Reset" />
+			</div>
+		</form>
+	</div>
+	</th>
+</html>

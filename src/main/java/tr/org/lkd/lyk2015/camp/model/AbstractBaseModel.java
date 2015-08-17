@@ -16,7 +16,7 @@ public abstract class AbstractBaseModel {
 	private Calendar createDate;
 	private Calendar updateDate;
 	private Calendar deleteDate;
-	private Boolean delete;
+	private Boolean deleted = false;
 
 	public Long getId() {
 		return id;
@@ -50,12 +50,14 @@ public abstract class AbstractBaseModel {
 		this.deleteDate = deleteDate;
 	}
 
-	public Boolean getDelete() {
-		return delete;
+	public Boolean getDeleted() {
+		return deleted;
 	}
 
-	public void setDelete(Boolean delete) {
-		this.delete = delete;
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
+
+
 
 }

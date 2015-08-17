@@ -14,43 +14,43 @@ import org.springframework.stereotype.Repository;
 import tr.org.lkd.lyk2015.camp.model.Instructor;
 
 @Repository
-public class InstructorDao {
+public class InstructorDao extends GenericDao<Instructor>{
 
-	@Autowired
-	protected SessionFactory sessionFactory;
-
-	protected Logger logger = LoggerFactory.getLogger(getClass());
-
-	public Long create(final Instructor Instructor) {
-		final Session session = sessionFactory.getCurrentSession();
-		return (Long) session.save(Instructor);
-	}
-
-	public Instructor getById(final Long id) {
-		final Session session = sessionFactory.getCurrentSession();
-		return (Instructor) session.get(Instructor.class, id);
-	}
-
-	public Instructor update(final Instructor Instructor) {
-		final Session session = sessionFactory.getCurrentSession();
-		return (Instructor) session.merge(Instructor);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Instructor> getAll() {
-
-		final Session session = sessionFactory.getCurrentSession();
-		final Criteria criteria = session.createCriteria(Instructor.class);
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		criteria.setFetchMode("*", FetchMode.JOIN);
-
-		return criteria.list();
-	}
-
-	public void hardDelete(final Instructor Instructor) {
-
-		final Session session = sessionFactory.getCurrentSession();
-		session.delete(Instructor);
-	}
+//	@Autowired
+//	protected SessionFactory sessionFactory;
+//
+//	protected Logger logger = LoggerFactory.getLogger(getClass());
+//
+//	public Long create(final Instructor Instructor) {
+//		final Session session = sessionFactory.getCurrentSession();
+//		return (Long) session.save(Instructor);
+//	}
+//
+//	public Instructor getById(final Long id) {
+//		final Session session = sessionFactory.getCurrentSession();
+//		return (Instructor) session.get(Instructor.class, id);
+//	}
+//
+//	public Instructor update(final Instructor Instructor) {
+//		final Session session = sessionFactory.getCurrentSession();
+//		return (Instructor) session.merge(Instructor);
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	public List<Instructor> getAll() {
+//
+//		final Session session = sessionFactory.getCurrentSession();
+//		final Criteria criteria = session.createCriteria(Instructor.class);
+//		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//		criteria.setFetchMode("*", FetchMode.JOIN);
+//
+//		return criteria.list();
+//	}
+//
+//	public void hardDelete(final Instructor Instructor) {
+//
+//		final Session session = sessionFactory.getCurrentSession();
+//		session.delete(Instructor);
+//	}
 
 }

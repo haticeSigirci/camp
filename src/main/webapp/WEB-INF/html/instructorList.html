@@ -35,10 +35,7 @@
 					
 
 					<td>
-						<form action="#" th:action="@{/instructors/update}" method="get">
-							<button name="id" value="${instructor.id}" th:value="${instructor.id}"
-								class="btn btn-primary">Edit</button>
-						</form>
+						<a th:href="@{/instructor/update/__${instructor.id}__}" class="btn btn-primary">Edit</a>
 					</td>
 				</tr>
 			</tbody>
