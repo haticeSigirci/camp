@@ -25,13 +25,21 @@
 					<p>
 						<input type="number" class="form-control" placeholder="Phone" th:field="*{phone}" th:value="*{phone}"/>
 					</p>
+					<div class="form-group">
+						<select multiple name="courseIds" class="form-control">
+							<option th:each="course : ${courses}" 
+								th:value="${course.id}"
+								th:text="${course.name}"
+								th:selected="${#lists.contains( instructor.courses,course)}">Courses</option>
+						</select>
+					</div>					
 					
 					
+					<!--  -->
 					<p>
-						<input type="submit" class="btn btn-primary" value="Submit" /> <input
-							type="reset" class="btn btn-primary" value="Reset" />
+						<input type="submit" class="btn btn-primary" value="Submit" /> 
 					</p>
-					<li th:each="e : ${#fields.detailedErrors()}"></li>
+					
 				</div>
 			</form>
 		</div>
