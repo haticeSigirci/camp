@@ -7,7 +7,4 @@ public interface TcknValidationService {
 
 	public abstract boolean validate(String name, String surname, Integer birthDate, Long tckn);
 
-	
-	
-	
 }

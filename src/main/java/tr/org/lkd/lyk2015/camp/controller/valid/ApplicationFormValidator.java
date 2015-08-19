@@ -87,7 +87,15 @@ public class ApplicationFormValidator implements Validator {
 
 			errors.rejectValue("student.email", "error.emailInvalid", "Black List");
 		}
-
+		//
+		// boolean emailCheck =
+		// this.emailValidationService.sendEmail(student.getEmail(),student.get);
+		//
+		// if (!emailCheck) {
+		//
+		// errors.rejectValue("student.email", "error.emailInvalid", "Black
+		// List");
+		// }
 	}
 
 }

@@ -212,7 +212,7 @@
                         <label for="firstChoice" class="col-lg-2 col-md-2 control-label">1. Tercih</label>
 
                         <div class="col-lg-10 col-md-10">
-                            <select class="form-control" id="firstChoice" th:field="*{preferredCourseIds}">
+                            <select class="form-control" id="firstChoice" th:field="*{preferredCourseIds[0]}" >
                             	<option value="">Seciniz</option>
                                 <option th:each="course : ${courses}"
                                         th:value="${course.id}"
@@ -228,7 +228,7 @@
                         <label for="secondChoice" class="col-lg-2 col-md-2 control-label">2. Tercih</label>
 
                         <div class="col-lg-10 col-md-10">
-                            <select class="form-control" id="secondChoice" th:field="*{preferredCourseIds}">
+                            <select class="form-control" id="secondChoice" th:field="*{preferredCourseIds[1]}">
                                 <option value="">Seciniz</option>
                                 <option th:each="course : ${courses}"
                                         th:value="${course.id}"
@@ -243,7 +243,7 @@
                         <label for="thirdChoice" class="col-lg-2 col-md-2 control-label">3. Tercih</label>
 
                         <div class="col-lg-10 col-md-10">
-                            <select class="form-control" id="thirdChoice" th:field="*{preferredCourseIds}">
+                            <select class="form-control" id="thirdChoice" th:field="*{preferredCourseIds[2]}">
                                 <option value="">Seciniz</option>
                                 <option th:each="course : ${courses}"
                                         th:value="${course.id}"

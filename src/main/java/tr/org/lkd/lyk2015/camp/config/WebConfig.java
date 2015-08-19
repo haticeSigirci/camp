@@ -22,21 +22,21 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-
-
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan({"tr.org.lkd.lyk2015.camp.service","tr.org.lkd.lyk2015.camp.controller","tr.org.lkd.lyk2015.camp.dal"})
-public class WebConfig extends WebMvcConfigurerAdapter{
+@ComponentScan({ "tr.org.lkd.lyk2015.camp.service", "tr.org.lkd.lyk2015.camp.controller",
+		"tr.org.lkd.lyk2015.camp.dal" })
+public class WebConfig extends WebMvcConfigurerAdapter {
 
-	@Bean			//bean annotation ???
+	@Bean // bean annotation ???
 	@Description("Thymeleaf template resolver serving HTML 5")
 	public ServletContextTemplateResolver templateResolver() {
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
 		templateResolver.setPrefix("/WEB-INF/html/");
-		//bunu yaptigimiz icin html olarak aliyor jsp olarak da alabilir
-		//templateResolver ThymeLeaf den geliyor jsp kullansaydik onun resolver ini almamiz gerekecekti
+		// bunu yaptigimiz icin html olarak aliyor jsp olarak da alabilir
+		// templateResolver ThymeLeaf den geliyor jsp kullansaydik onun resolver
+		// ini almamiz gerekecekti
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("LEGACYHTML5");
 		templateResolver.setCharacterEncoding("UTF-8");
@@ -44,25 +44,24 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 
 		return templateResolver;
 	}
-	
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new ThymeleafLayoutInterceptor());
 	}
 
-	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		
+
 		registry.addResourceHandler("/resources/**").addResourceLocations("/static/");
-		
+
 	}
-	
+
 	@Bean
 	@Description("Thymeleaf template engine with Spring integration")
 	public SpringTemplateEngine templateEngine() {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver());
+		templateEngine.setTemplateResolver(this.templateResolver());
 
 		return templateEngine;
 	}
@@ -72,12 +71,12 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	public ThymeleafViewResolver viewResolver() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setContentType("text/html;charset=UTF-8");
-		viewResolver.setTemplateEngine(templateEngine());
+		viewResolver.setTemplateEngine(this.templateEngine());
 
 		return viewResolver;
 	}
 
-	@Bean(name = "dataSource")   //hibernate
+	@Bean(name = "dataSource") // hibernate
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
@@ -101,8 +100,11 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 
-		sessionBuilder.scanPackages("tr.org.lkd.lyk2015.camp.model");		//entity lere bakip buluyor
-		sessionBuilder.addProperties(getHibernateProperties());
+		sessionBuilder.scanPackages("tr.org.lkd.lyk2015.camp.model"); // entity
+																		// lere
+																		// bakip
+																		// buluyor
+		sessionBuilder.addProperties(this.getHibernateProperties());
 
 		return sessionBuilder.buildSessionFactory();
 	}
@@ -114,10 +116,9 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
 		properties.put("hibernate.use_sql_comments", "true");
-	//	properties.put("hibernate.enable_lazy_load_no_trans", "true"); Lazy loading kullanmamiz gerekiyor
+		// properties.put("hibernate.enable_lazy_load_no_trans", "true"); Lazy
+		// loading kullanmamiz gerekiyor
 		return properties;
 	}
-	
-	
-	
+
 }
