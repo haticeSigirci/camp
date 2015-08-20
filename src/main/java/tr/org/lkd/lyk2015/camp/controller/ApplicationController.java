@@ -1,5 +1,7 @@
 package tr.org.lkd.lyk2015.camp.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import tr.org.lkd.lyk2015.camp.controller.valid.ApplicationFormValidator;
 import tr.org.lkd.lyk2015.camp.dto.ApplicationFormDto;
+import tr.org.lkd.lyk2015.camp.model.Application;
 import tr.org.lkd.lyk2015.camp.service.ApplicationService;
 import tr.org.lkd.lyk2015.camp.service.CourseService;
 
@@ -47,12 +50,12 @@ public class ApplicationController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(@ModelAttribute("form") @Valid ApplicationFormDto applicationFormDto,
 			BindingResult bindingResult, Model model) {
-		//
-		// if (bindingResult.hasErrors()) {
-		//
-		// model.addAttribute("courses", this.courseService.getAll());
-		// return "applicationForm";
-		// }
+
+		if (bindingResult.hasErrors()) {
+
+			model.addAttribute("courses", this.courseService.getAll());
+			return "applicationForm";
+		}
 		this.applicationService.create(applicationFormDto);
 
 		return "applicationSuccess"; // applicationFormSuccess
@@ -73,5 +76,21 @@ public class ApplicationController {
 			return "validated";
 		}
 	}
+
+	@RequestMapping(value = "/apps", method = RequestMethod.GET)
+	public String list(Model model) {
+		List<Application> apps = this.applicationService.getAll();
+
+		model.addAttribute("applicationList", apps);
+		return "applications";
+	}
+
+	// @RequestMapping(value = "/apps/selected/{id}", method =
+	// RequestMethod.GET)
+	// public String selectedApps(@ModelAttribute Application application, Model
+	// model, @PathVariable("id") Long id) {
+	//
+	// return "applications";
+	// }
 
 }

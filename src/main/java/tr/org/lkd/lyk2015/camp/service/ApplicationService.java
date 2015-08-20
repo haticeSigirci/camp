@@ -16,7 +16,7 @@ import tr.org.lkd.lyk2015.camp.model.Application;
 import tr.org.lkd.lyk2015.camp.model.Course;
 import tr.org.lkd.lyk2015.camp.model.Student;
 
-@Transactional
+@Transactional // Session acik burada
 @Service
 public class ApplicationService extends GenericService<Application> {
 
@@ -80,6 +80,8 @@ public class ApplicationService extends GenericService<Application> {
 			return false;
 		} else {
 			application.setValidated(true);
+
+			// update gerek yok ?
 			this.applicationDao.update(application);
 			return true;
 		}

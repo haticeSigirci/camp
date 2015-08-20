@@ -3,11 +3,14 @@ package tr.org.lkd.lyk2015.camp.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 /**
  * This entity represents an application form which is submitted by a Student.
@@ -23,29 +26,35 @@ public class Application extends AbstractBaseModel {
 		WORKING, STUDENT, NOT_WORKING
 	}
 
+	@Min(2012)
+	// @Column(nullable = false)
 	private Integer year;
 
+	// @NotEmpty
 	@Enumerated(EnumType.STRING)
 	private WorkStatus workStatus;
 
+	@Column(nullable = false)
 	private Boolean officer = false;
 
 	private String corporation;
 
 	private String workDetails;
-
+	@Column(nullable = false)
 	private Integer englishLevel = 0;
 
 	private String githubLink;
-
+	@Column(nullable = false)
 	private Boolean validated = false;
-
+	@Column(nullable = false)
 	private String validationId;
 
 	@ManyToMany
+	@Size(min = 1, max = 3)
 	private Set<Course> preferredCourses = new HashSet<>();
 
-	@ManyToOne
+	// @NotEmpty
+	@ManyToOne(optional = false)
 	private Student owner;
 
 	private boolean needAccomodation = true;
