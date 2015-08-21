@@ -31,6 +31,7 @@ public class InstructorService extends GenericService<Instructor> {
 		List<Course> courses = this.courseDao.getByIds(ids);
 
 		instructor.getCourses().addAll(courses);
+		instructor.setPassword(this.passwordEncoder.encode(instructor.getPassword()));
 
 		this.instructorDao.create(instructor);
 	}
@@ -46,11 +47,5 @@ public class InstructorService extends GenericService<Instructor> {
 	}
 
 	// butun courselarin yazili gelmesi ait olanlarin secili gelmesi
-
-	@Override
-	public Long create(Instructor instructor) {
-		instructor.setPassword(this.passwordEncoder.encode(instructor.getPassword()));
-		return super.create(instructor);
-	}
 
 }

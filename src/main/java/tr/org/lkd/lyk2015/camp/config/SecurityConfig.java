@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -24,8 +24,26 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/basvuru", "/admin/create", "/admin/create/", "/resources/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/admin").permitAll().anyRequest().authenticated().and().formLogin();
+
+	//	@formatter:off
+
+		http.authorizeRequests()
+		// authentication
+					.antMatchers("/basvuru", "/resources/**", "/applications/validate/**").permitAll()
+
+					// authorization
+					.antMatchers("/admins/**").hasAuthority("ADMIN")
+					.antMatchers("/courses/create/**").hasAuthority("ADMIN")// courses (list) will be seen by any authenticated user
+																			// but only admin will be able to create new course
+					.antMatchers("/instructors/**").hasAnyAuthority("ADMIN", "INSTRUCTOR")
+					.antMatchers("/instructors/create/**").hasAuthority("ADMIN")
+					.anyRequest().authenticated()
+					.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.and().formLogin();
+		// hangi kullanicinin url e gore nereye giris yapabilecegi
+
+	//	@formatter:on
+
 	}
 
 	@Autowired

@@ -14,7 +14,6 @@ public abstract class AbstractBaseModel {
 	@GeneratedValue
 	private Long id;
 
-	// @NotNull
 	@Column(nullable = false)
 	private Calendar createDate;
 	@Column(nullable = false)

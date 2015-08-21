@@ -1,14 +1,11 @@
 package tr.org.lkd.lyk2015.camp.model;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @MappedSuperclass
@@ -88,12 +85,6 @@ public abstract class AbstractUser extends AbstractBaseModel implements UserDeta
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
