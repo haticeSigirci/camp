@@ -28,18 +28,19 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 	//	@formatter:off
 
 		http.authorizeRequests()
-		// authentication
-					.antMatchers("/basvuru", "/resources/**", "/applications/validate/**").permitAll()
 
-					// authorization
-					.antMatchers("/admins/**").hasAuthority("ADMIN")
-					.antMatchers("/courses/create/**").hasAuthority("ADMIN")// courses (list) will be seen by any authenticated user
-																			// but only admin will be able to create new course
-					.antMatchers("/instructors/**").hasAnyAuthority("ADMIN", "INSTRUCTOR")
-					.antMatchers("/instructors/create/**").hasAuthority("ADMIN")
-					.anyRequest().authenticated()
-					.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.and().formLogin();
+		// authentication
+		.antMatchers("/basvuru", "/resources/**", "/applications/validate/**").permitAll()
+
+		// authorization
+		.antMatchers("/admin/**").hasAuthority("ADMIN")
+		.antMatchers("/course/create/**").hasAuthority("ADMIN")// courses (list) will be seen by any authenticated user
+																// but only admin will be able to create new course
+		.antMatchers("/instructor/**").hasAnyAuthority("ADMIN", "INSTRUCTOR")
+		.antMatchers("/instructor/create/**").hasAuthority("ADMIN")
+		.anyRequest().authenticated()
+		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.and().formLogin();
 		// hangi kullanicinin url e gore nereye giris yapabilecegi
 
 	//	@formatter:on
