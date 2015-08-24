@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import tr.org.lkd.lyk2015.camp.config.Layout;
 import tr.org.lkd.lyk2015.camp.controller.valid.ApplicationFormValidator;
 import tr.org.lkd.lyk2015.camp.dto.ApplicationFormDto;
 import tr.org.lkd.lyk2015.camp.model.Student;
@@ -33,6 +34,7 @@ public class ApplicationController {
 	@Autowired
 	private ApplicationFormValidator applicationFormValidator;
 
+	@Layout("layout/public")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String form(Model model, Authentication authentication) {
 
@@ -66,6 +68,7 @@ public class ApplicationController {
 		binder.addValidators(this.applicationFormValidator);
 	}
 
+	@Layout("layout/public")
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(@ModelAttribute("form") @Valid ApplicationFormDto applicationFormDto,
 			BindingResult bindingResult, Model model, Authentication authentication) {

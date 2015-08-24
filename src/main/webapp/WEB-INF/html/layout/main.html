@@ -4,14 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<title>TODO APLICATION</title>
+<title>LINUX YAZ KAMPI</title>
 <!-- Bootstrap core CSS -->
 <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" />
-<link th:href="@{/resources/css/sticky-footer-navbar.css}"
-	rel="stylesheet" />
+<link th:href="@{/resources/css/sticky-footer-navbar.css}" rel="stylesheet" />
 <link th:href="@{/resources/css/common.css}" rel="stylesheet" />
 </head>
 <body>
@@ -44,8 +42,7 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Instructor <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a th:href="@{/instructor/create}">Create
-									Instructor</a></li>
+							<li><a th:href="@{/instructor/create}">Create Instructor</a></li>
 							<li><a th:href="@{/instructor}">Show Instructors</a></li>
 							<li><a href="#">Something else here</a></li>
 						</ul></li>
@@ -64,8 +61,8 @@
 		</div>
 	</nav>
 	<!-- /Fixed navbar -->
-	<main class="container"> <th:block
-		th:include="${layout_main} :: content">
+	<main class="container"> 
+	<th:block th:include="${layout_main} :: content">
 	</th:block> </main>
 	<footer class="footer" style="background-color: #222;">
 		<div class="container text-center">
